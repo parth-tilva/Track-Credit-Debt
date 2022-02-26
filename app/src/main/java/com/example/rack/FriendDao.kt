@@ -25,4 +25,7 @@ interface FriendDao {
     @Query("SELECT * FROM friend WHERE id = :id ")
     fun getFriendById(id: Int): Flow<Friend>
 
+    @Query("Select * from friend Where id= :id")
+    fun getLiveFriend(id:Int ): LiveData<Friend>
+
 }

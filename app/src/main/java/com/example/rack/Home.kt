@@ -42,6 +42,8 @@ class Home : Fragment(), IFriend {
 
         binding.AddFriend.setOnClickListener{
             val name = binding.editTextTextPersonName.text.toString()
+//            val time = System.currentTimeMillis()
+//            val money = Money(time = time)
             if(name.isNotEmpty()){
                 viewModel.addNewFriend(name)
                 binding.editTextTextPersonName.setText("")
@@ -63,6 +65,6 @@ class Home : Fragment(), IFriend {
     }
 
     override fun onDelete(item: Friend) {
-        viewModel.deleteFriend(item)
+        //viewModel.deleteFriend(item)
     }
 }

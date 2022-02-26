@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.rack.databinding.FragmentDebtBinding
 import kotlinx.coroutines.flow.collect
@@ -47,50 +45,57 @@ class DebtFragment : Fragment(), IMoney {
 
         //testing
 
-//        lifecycle.coroutineScope.launch {
-//            viewModel.GetFriendById(fId).collect {
-//                binding.nameFriend.text = "Name is by id  : ${it.fiendName}"
-//                println("testing 23: ${it.fiendName}")
-//
-//            }
-//        }
+        lifecycle.coroutineScope.launch {
+            viewModel.GetFriendById(fId).collect {
+                friend = it
+                adapter.submitList(it.listOfMoney)
+                        binding.totalMoney.text = "Total: ${friend.total} Rupees"
+                        binding.nameFriend.text = friend.fiendName
+            }
+        }
 
+        val friendlive = viewModel.getLiveFriend(fId).value
+        println("live friend: $friendlive")
 
         //testing
 
 
 
-        viewModel.allFriend.observe(this.viewLifecycleOwner){
-            it.let {
-                it.forEach { F->
-                    if(F.id == fId){
-                        friend = F
-                        adapter.submitList(F.list)
-                        binding.totalMoney.text = "Total: ${friend.total} Rupees"
-                        binding.nameFriend.text = friend.fiendName
-                    }
-                }
-            }
-        }
+//        viewModel.allFriend.observe(this.viewLifecycleOwner){
+//            it.let {
+//                it.forEach { F->
+//                    if(F.id == fId){
+//                        friend = F
+//                        adapter.submitList(F.listOfMoney)
+//                        binding.totalMoney.text = "Total: ${friend.total} Rupees"
+//                        binding.nameFriend.text = friend.fiendName
+//                    }
+//                }
+//            }
+//        }
 
         binding.addMoneyBtn.setOnClickListener {
             //Toast.makeText(activity,"test ${friend}",Toast.LENGTH_SHORT).show()
             val str = binding.enterMoney.text.toString()
+            val t = System.currentTimeMillis()
+            val money = Money(time = t)
             if(str.isNotEmpty()){
-                friend= viewModel.addDebt(fId,friend,str)
+                friend= viewModel.addDebt(fId,friend,str,money)
+                println("list of Money ${friend.listOfMoney}")
                 binding.totalMoney.text = "Total: ${friend.total} Rupees"
-                adapter.submitList(friend.list)
+                adapter.submitList(friend.listOfMoney)
                 adapter.notifyDataSetChanged()
                 binding.enterMoney.setText("")
             }
         }
     }
 
-    override fun onDelete(str: String) {
-       friend =  viewModel.removeDebt(str,friend)
-        binding.totalMoney.text = "Total: ${friend.total} Rupees"
-        adapter.submitList(friend.list)
-        adapter.notifyDataSetChanged()
+    override fun onDelete(money: Money) {
+
+//       friend =  viewModel.removeDebt(str,friend)
+//        binding.totalMoney.text = "Total: ${friend.total} Rupees"
+//        adapter.submitList(friend.listOfMoney)
+//        adapter.notifyDataSetChanged()
     }
 
 

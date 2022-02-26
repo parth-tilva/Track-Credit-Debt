@@ -7,22 +7,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rack.databinding.ItemFriendBinding
 
-class MoneyListAdapter(private val listner:IMoney) :ListAdapter<String,MoneyListAdapter.MoneyViewHolder>(DiffCallback) {
+class MoneyListAdapter(private val listner:IMoney) :ListAdapter<Money,MoneyListAdapter.MoneyViewHolder>(DiffCallback) {
     companion object{
-        private val DiffCallback = object: DiffUtil.ItemCallback<String>(){
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        private val DiffCallback = object: DiffUtil.ItemCallback<Money>(){
+            override fun areItemsTheSame(oldItem: Money, newItem: Money): Boolean {
                 return oldItem == newItem
             }
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-                return oldItem == newItem
+            override fun areContentsTheSame(oldItem: Money, newItem: Money): Boolean {
+                return oldItem.time == newItem.time
             }
         }
 
     }
     class MoneyViewHolder(private val binding: ItemFriendBinding):RecyclerView.ViewHolder(binding.root) {
         val deleteBtn = binding.deleteButton
-        fun bind(string: String){
-            binding.tvFriendName.text = string
+        fun bind(money: Money){
+            binding.tvFriendName.text = money.amount.toString()
         }
     }
 
@@ -33,16 +33,14 @@ class MoneyListAdapter(private val listner:IMoney) :ListAdapter<String,MoneyList
     }
 
     override fun onBindViewHolder(holder: MoneyViewHolder, position: Int) {
-        val str = getItem(position)
-        holder.bind(str)
+        val moneyItem = getItem(position)
+        holder.bind(moneyItem)
         holder.deleteBtn.setOnClickListener {
-            listner.onDelete(str)
+            listner.onDelete(moneyItem)
         }
     }
-
-
 }
 
 interface IMoney{
-    fun onDelete(str: String)
+    fun onDelete(money: Money)
 }

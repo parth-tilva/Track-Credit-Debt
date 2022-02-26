@@ -20,7 +20,6 @@ class FriendAdapter(private val listner: IFriend) :ListAdapter<Friend,FriendAdap
                 return oldItem.fiendName == newItem.fiendName
             }
         }
-
     }
 
 
