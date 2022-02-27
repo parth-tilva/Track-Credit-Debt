@@ -1,11 +1,14 @@
 package com.example.rack
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rack.databinding.ItemFriendBinding
+import com.example.rack.databinding.MoneyItemBinding
 
 class MoneyListAdapter(private val listner:IMoney) :ListAdapter<Money,MoneyListAdapter.MoneyViewHolder>(DiffCallback) {
     companion object{
@@ -14,22 +17,23 @@ class MoneyListAdapter(private val listner:IMoney) :ListAdapter<Money,MoneyListA
                 return oldItem == newItem
             }
             override fun areContentsTheSame(oldItem: Money, newItem: Money): Boolean {
-                return oldItem.time == newItem.time
+                return oldItem.dateAndTime == newItem.dateAndTime
             }
         }
 
     }
-    class MoneyViewHolder(private val binding: ItemFriendBinding):RecyclerView.ViewHolder(binding.root) {
+    class MoneyViewHolder(private val binding: MoneyItemBinding):RecyclerView.ViewHolder(binding.root) {
         val deleteBtn = binding.deleteButton
         fun bind(money: Money){
             binding.tvFriendName.text = money.amount.toString()
+            binding.txtNote.text = "Note: " + money.note
+            binding.txtTimeAndDate.text = money.dateAndTime
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoneyViewHolder {
         return MoneyViewHolder(
-            ItemFriendBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        )
+            MoneyItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: MoneyViewHolder, position: Int) {

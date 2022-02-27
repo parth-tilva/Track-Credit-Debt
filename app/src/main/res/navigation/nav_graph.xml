@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/home2"
         android:name="com.example.rack.Home"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home2_to_debtFragment2"
             app:destination="@id/debtFragment" />
@@ -16,10 +16,32 @@
     <fragment
         android:id="@+id/debtFragment"
         android:name="com.example.rack.DebtFragment"
-        android:label="fragment_debt"
-        tools:layout="@layout/fragment_debt" >
+        android:label="Track Debit|Credit"
+        tools:layout="@layout/fragment_debt">
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_debtFragment_to_addMoneyFragment"
+            app:destination="@id/addMoneyFragment" />
+        <action
+            android:id="@+id/action_debtFragment_to_home2"
+            app:destination="@id/home2"
+            app:popUpTo="@id/home2"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMoneyFragment"
+        android:name="com.example.rack.AddMoneyFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_add_money">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_addMoneyFragment_to_debtFragment"
+            app:destination="@id/debtFragment"
+            app:popUpTo="@id/debtFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

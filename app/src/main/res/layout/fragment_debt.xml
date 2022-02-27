@@ -16,10 +16,11 @@
             android:id="@+id/name_friend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="5dp"
             android:text="Money list"
             android:textColor="@color/black"
             android:textSize="35sp"
+            android:layout_marginStart="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,35 +38,42 @@
             tools:itemCount="23"
             tools:listitem="@layout/item_friend" />
 
-        <EditText
+        <TextView
             android:id="@+id/enter_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Add Money"
-            android:inputType="number"
-            app:layout_constraintEnd_toStartOf="@+id/add_money_btn"
+            android:text="History"
+            android:textSize="23sp"
+            android:padding="5dp"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_friend" />
 
-        <Button
-            android:id="@+id/add_money_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            app:layout_constraintBottom_toBottomOf="@+id/enter_money"
-            app:layout_constraintEnd_toEndOf="parent" />
+
 
         <TextView
             android:id="@+id/total_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="164dp"
             android:text="Total: 0 Rupees"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_baseline_add_24"
+            android:scaleType="centerCrop"
+            app:tint="@color/white"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

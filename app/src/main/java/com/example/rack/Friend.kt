@@ -20,43 +20,24 @@ data class Friend(
 
 
 data class Money(
-    val strMoney: String="",
-    val amount: Int=11,
-    val note: String="emt note",
-    val time: Long,
-    val Date: String=""
+    val amount: Int=0,
+    val note: String="Add Note",
+    val dateAndTime: String=""
 )
 
 
-//class FriendTypeConverter{
-//    @TypeConverter
-//    fun stringToList(data: String?): List<Money?>?{
-//        val listType = object : TypeToken<List<Money>>() {}.type
-//        return Gson().fromJson(data,listType)
-//    }
-//
-//    @TypeConverter
-//    fun listToString(someObject: List<Money>?): String? {
-//        return Gson().toJson(someObject)
-//    }
-//}
+class FriendTypeConverter{
+    @TypeConverter
+    fun stringToList(data: String?): List<Money?>?{
+        val listType = object : TypeToken<List<Money>>() {}.type
+        return Gson().fromJson(data,listType)
+    }
 
-
-//stackoverflow
-//@TypeConverter
-//fun stringToListServer(data: String?): List<ServerEntity?>? {
-//    if (data == null) {
-//        return Collections.emptyList()
-//    }
-//    val listType: Type = object :
-//        TypeToken<List<ServerEntity?>?>() {}.type
-//    return gson.fromJson<List<ServerEntity?>>(data, listType)
-//}
-//
-//@TypeConverter
-//fun listServerToString(someObjects: List<ServerEntity?>?): String? {
-//    return gson.toJson(someObjects)
-//}
+    @TypeConverter
+    fun listToString(someObject: List<Money>?): String? {
+        return Gson().toJson(someObject)
+    }
+}
 
 
 
