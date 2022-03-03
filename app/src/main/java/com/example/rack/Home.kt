@@ -1,16 +1,21 @@
 package com.example.rack
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rack.databinding.FragmentHomeBinding
 import com.example.rack.databinding.FragmentHomeBinding.inflate
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class Home : Fragment(), IFriend {
@@ -41,12 +46,18 @@ class Home : Fragment(), IFriend {
         binding.rvListOfFriend.adapter = adapter
 
         binding.AddFriend.setOnClickListener{
-            val name = binding.editTextTextPersonName.text.toString()
-            if(name.isNotEmpty()){
-                viewModel.addNewFriend(name)
-                binding.editTextTextPersonName.setText("")
-            }
+            addFriend()
         }
+        binding.editTextTextPersonName.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_GO) {
+                addFriend();
+                val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as
+                        InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
+            }
+            false;
+        }
+
         viewModel.allFriend.observe(this.viewLifecycleOwner){
             it.let {
                 adapter.submitList(it)
@@ -56,6 +67,14 @@ class Home : Fragment(), IFriend {
 
     }
 
+    private fun addFriend() {
+        val name = binding.editTextTextPersonName.text.toString()
+        if(name.isNotEmpty()){
+            viewModel.addNewFriend(name)
+            binding.editTextTextPersonName.setText("")
+        }
+    }
+
     override fun onClicked(item: Friend) {
         val action = HomeDirections.actionHome2ToDebtFragment2(item.id)
         this.findNavController().navigate(action)
@@ -63,6 +82,18 @@ class Home : Fragment(), IFriend {
     }
 
     override fun onDelete(item: Friend) {
-        viewModel.deleteFriend(item)
+        val dialog =  AlertDialog.Builder(requireContext())
+        dialog.setTitle(getString(android.R.string.dialog_alert_title))
+        dialog.setMessage(getString(R.string.delete_question))
+        dialog.setPositiveButton("OK"){ _, _ ->
+            //do nothing
+            viewModel.deleteFriend(item)
+        }
+        dialog.setNegativeButton("No"){ _,_->
+            //do nothing
+            Toast.makeText(context,"No Clicked", Toast.LENGTH_LONG).show()
+        }
+        dialog.create()
+        dialog.show()
     }
 }

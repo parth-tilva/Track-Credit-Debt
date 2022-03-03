@@ -42,9 +42,13 @@ class MoneyListAdapter(private val listner:IMoney) :ListAdapter<Money,MoneyListA
         holder.deleteBtn.setOnClickListener {
             listner.onDelete(moneyItem)
         }
+        holder.itemView.setOnClickListener {
+            listner.onItemClicked(moneyItem)
+        }
     }
 }
 
 interface IMoney{
     fun onDelete(money: Money)
+    fun onItemClicked(money:Money)
 }

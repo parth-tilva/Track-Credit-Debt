@@ -6,4 +6,8 @@
     <string name="currency_symbol">₹</string>
     <string name="add_note">Add Note</string>
 
+
+    <string name="delete_question">Are you sure you want to delete?</string>
+
+
 </resources>

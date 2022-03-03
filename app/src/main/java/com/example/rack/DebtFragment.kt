@@ -11,6 +11,7 @@ import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.rack.databinding.FragmentDebtBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -22,6 +23,7 @@ class DebtFragment : Fragment(), IMoney {
     private var _binding:FragmentDebtBinding? = null
     private val binding get( ) = _binding!!
     private lateinit var adapter: MoneyListAdapter
+     var fId:Int = -1
     private val viewModel:FriendViewModel by activityViewModels{
         FViewModelFactory(
             (activity?.applicationContext as FriendApplication).dataBase.friendDao()
@@ -39,7 +41,7 @@ class DebtFragment : Fragment(), IMoney {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fId = navigationArgs.id
+         fId = navigationArgs.id
         adapter = MoneyListAdapter(this)
         binding.moneyList.adapter = adapter
 
@@ -53,14 +55,28 @@ class DebtFragment : Fragment(), IMoney {
         }
 
         binding.fabAddMoney.setOnClickListener {
-            val action = DebtFragmentDirections.actionDebtFragmentToAddMoneyFragment(fId)
+            val action = DebtFragmentDirections.actionDebtFragmentToAddMoneyFragment(fId,null)
             this.findNavController().navigate(action)
         }
 
     }
 
     override fun onDelete(money: Money) {
-           viewModel.removeDebt(money,friend)
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(android.R.string.dialog_alert_title))
+            .setMessage(getString(R.string.delete_question))
+            .setCancelable(false)
+            .setNegativeButton("No") { _, _ -> }
+            .setPositiveButton("yes") { _, _ ->
+                viewModel.removeDebt(money,friend)
+            }
+            .show()
     }
+
+    override fun onItemClicked(money: Money) {
+        val action = DebtFragmentDirections.actionDebtFragmentToAddMoneyFragment(fId, money.dateAndTime)
+        this.findNavController().navigate(action)
+    }
+
 
 }

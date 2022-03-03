@@ -24,11 +24,6 @@
         <action
             android:id="@+id/action_debtFragment_to_addMoneyFragment"
             app:destination="@id/addMoneyFragment" />
-        <action
-            android:id="@+id/action_debtFragment_to_home2"
-            app:destination="@id/home2"
-            app:popUpTo="@id/home2"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addMoneyFragment"
@@ -36,10 +31,14 @@
         android:label="Details"
         tools:layout="@layout/fragment_add_money">
         <argument
-            android:name="id"
+            android:name="friendId"
             app:argType="integer" />
+        <argument
+            android:name="timeAndDate"
+            app:argType="string"
+            app:nullable="true" />
         <action
-            android:id="@+id/action_addMoneyFragment_to_debtFragment"
+            android:id="@+id/action_addMoneyFragment_to_debtFragment2"
             app:destination="@id/debtFragment"
             app:popUpTo="@id/debtFragment"
             app:popUpToInclusive="true" />
