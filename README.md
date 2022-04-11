@@ -1,5 +1,4 @@
 # Track-Credit-Debt
-![HeaderImage](git_images/alert.jpg)
 ## Introduction
 This is a Android application to note down debt and credit for different friends with goal to learn Room database and Jetpack's Navigation component.
 #### Technologies
