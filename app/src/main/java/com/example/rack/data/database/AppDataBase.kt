@@ -1,7 +1,9 @@
-package com.example.rack
+package com.example.rack.data.database
 
 import android.content.Context
 import androidx.room.*
+import com.example.rack.Friend
+import com.example.rack.FriendTypeConverter
 
 @Database(entities = [Friend::class],version = 1, exportSchema = false)
 @TypeConverters(FriendTypeConverter::class)

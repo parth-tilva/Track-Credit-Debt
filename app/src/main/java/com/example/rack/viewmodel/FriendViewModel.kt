@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.*
+import com.example.rack.data.database.FriendDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-const val TAG = "FriendViewModel"
 class FriendViewModel(private val itemDao: FriendDao): ViewModel() {
 
 
@@ -34,10 +34,8 @@ class FriendViewModel(private val itemDao: FriendDao): ViewModel() {
     }
 
     fun addMoney(friend: Friend, money: Money){
-
         friend.listOfMoney = friend.listOfMoney.plus(money)
         friend.total = friend.total + money.amount
-
         viewModelScope.launch {
             itemDao.update(friend)
         }

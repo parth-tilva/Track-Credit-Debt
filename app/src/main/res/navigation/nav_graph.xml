@@ -6,7 +6,7 @@
     app:startDestination="@id/home2">
     <fragment
         android:id="@+id/home2"
-        android:name="com.example.rack.Home"
+        android:name="com.example.rack.ui.Home"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/debtFragment"
-        android:name="com.example.rack.DebtFragment"
+        android:name="com.example.rack.ui.DebtFragment"
         android:label="Track Debit|Credit"
         tools:layout="@layout/fragment_debt">
         <argument
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMoneyFragment"
-        android:name="com.example.rack.AddMoneyFragment"
+        android:name="com.example.rack.ui.AddMoneyFragment"
         android:label="Details"
         tools:layout="@layout/fragment_add_money">
         <argument

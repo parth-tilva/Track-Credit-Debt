@@ -1,8 +1,9 @@
-package com.example.rack
+package com.example.rack.data.database
 
 import android.content.ClipData
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.rack.Friend
 import kotlinx.coroutines.flow.Flow
 val p ="parth"
 @Dao
@@ -13,7 +14,7 @@ interface FriendDao {
     suspend fun insert(friend: Friend)
 
     @Update
-    suspend fun update(friend: Friend)
+    suspend fun update(friend: Friend)  // unused
 
     @Delete
     suspend fun delete(friend: Friend)

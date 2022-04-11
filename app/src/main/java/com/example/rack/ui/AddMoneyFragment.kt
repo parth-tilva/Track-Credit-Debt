@@ -1,6 +1,5 @@
-package com.example.rack
+package com.example.rack.ui
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -8,18 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.rack.*
+import com.example.rack.data.database.FriendApplication
 import com.example.rack.databinding.FragmentAddMoneyBinding
-import com.example.rack.databinding.FragmentDebtBinding
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
-import java.util.Arrays.hashCode
 import kotlin.math.absoluteValue
 
 
@@ -34,7 +30,6 @@ class AddMoneyFragment : Fragment() {
     private val binding get() = _binding!!
     private val navigationArgs: AddMoneyFragmentArgs by navArgs()
     lateinit var friend: Friend
-    var Testfriend = Friend(-1, "")
     lateinit var toggleButton: ToggleButton
 
     var note = ""
@@ -108,7 +103,9 @@ class AddMoneyFragment : Fragment() {
                     amount = -amount
                 }
                 viewModel.addMoney(friend, Money(amount, note, dataAndTime))
-                val action = AddMoneyFragmentDirections.actionAddMoneyFragmentToDebtFragment2(fId)
+                val action = AddMoneyFragmentDirections.actionAddMoneyFragmentToDebtFragment2(
+                        fId
+                    )
                 findNavController().navigate(action)
             }
         } else{
@@ -140,7 +137,9 @@ class AddMoneyFragment : Fragment() {
                     }
                     viewModel.removeDebt(money,friend)
                     viewModel.addMoney(friend, Money(amount, note, dataAndTime))
-                    val action = AddMoneyFragmentDirections.actionAddMoneyFragmentToDebtFragment2(fId)
+                    val action = AddMoneyFragmentDirections.actionAddMoneyFragmentToDebtFragment2(
+                            fId
+                        )
                     findNavController().navigate(action)
                 }
             }else{
@@ -152,49 +151,3 @@ class AddMoneyFragment : Fragment() {
 
 }
 
-
-/*
-* private fun getInfo(timeAndDateArgs: String?){
-        if(timeAndDateArgs!=null){
-            println("not null old item")
-            Toast.makeText(requireContext(),"existing item is called",Toast.LENGTH_LONG).show()
-            val money = friend.listOfMoney.find{ it.dateAndTime == timeAndDateArgs }
-            if(money!=null){
-                binding.itemNote.setText(money.note)
-                binding.itemPrice.setText(money.amount.toString())
-                toggleButton.isChecked = amount>0
-                isCredit = amount>0
-                dataAndTime = timeAndDateArgs // money.dataAndTime
-
-            }else{
-                getInfo(null)
-                println("error is binidng friedn not found")
-                Toast.makeText(requireContext(),"friend not found eror binding ",Toast.LENGTH_LONG).show()
-            }
-        }
-        else{
-            println("null new item called")
-            Toast.makeText(requireContext(),"new item is called",Toast.LENGTH_LONG).show()
-        }
-            note = binding.itemNote.text.toString()
-            val moneyStr = binding.itemPrice.text.toString()   // may fail
-            if(moneyStr.isNotEmpty()){
-                amount = moneyStr.toInt()
-            }
-            if (isCredit) {
-                //The toggle is enabled (credit)
-                amountStr =  amount.toString()
-                println("str: $amountStr")
-            } else {
-                //The toggle is disabled (debit)
-                amount = -amount
-                amountStr = amount.toString()
-                println("str: $amountStr")
-            }
-        if(timeAndDateArgs==null){
-            currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
-            currentTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
-            dataAndTime = "Date: $currentDate\nTime: $currentTime"
-        }
-            binding.txtTime.text = dataAndTime
-    }*/

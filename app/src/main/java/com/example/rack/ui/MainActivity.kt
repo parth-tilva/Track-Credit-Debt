@@ -1,11 +1,11 @@
-package com.example.rack
+package com.example.rack.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.rack.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

@@ -1,4 +1,4 @@
-package com.example.rack
+package com.example.rack.ui
 
 import android.app.AlertDialog
 import android.content.Context
@@ -13,15 +13,18 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rack.*
+import com.example.rack.adapter.FriendAdapter
+import com.example.rack.adapter.IFriend
+import com.example.rack.data.database.FriendApplication
 import com.example.rack.databinding.FragmentHomeBinding
 import com.example.rack.databinding.FragmentHomeBinding.inflate
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class Home : Fragment(), IFriend {
 
 
-    private val viewModel:FriendViewModel by activityViewModels{
+    private val viewModel: FriendViewModel by activityViewModels{
         FViewModelFactory(
             (activity?.applicationContext as FriendApplication).dataBase.friendDao()
         )
@@ -63,7 +66,6 @@ class Home : Fragment(), IFriend {
                 adapter.submitList(it)
             }
         }
-
 
     }
 

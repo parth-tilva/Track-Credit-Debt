@@ -1,16 +1,16 @@
-package com.example.rack
+package com.example.rack.adapter
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rack.databinding.ItemFriendBinding
+import com.example.rack.Money
 import com.example.rack.databinding.MoneyItemBinding
 
-class MoneyListAdapter(private val listner:IMoney) :ListAdapter<Money,MoneyListAdapter.MoneyViewHolder>(DiffCallback) {
+class MoneyListAdapter(private val listner: IMoney) :ListAdapter<Money, MoneyListAdapter.MoneyViewHolder>(
+    DiffCallback
+) {
     companion object{
         private val DiffCallback = object: DiffUtil.ItemCallback<Money>(){
             override fun areItemsTheSame(oldItem: Money, newItem: Money): Boolean {
@@ -50,5 +50,5 @@ class MoneyListAdapter(private val listner:IMoney) :ListAdapter<Money,MoneyListA
 
 interface IMoney{
     fun onDelete(money: Money)
-    fun onItemClicked(money:Money)
+    fun onItemClicked(money: Money)
 }
