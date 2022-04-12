@@ -25,9 +25,9 @@ Android, Kotlin
 ### Home | History | Details/edit | Alert Dialog 
 
 <p align = "left" >
-  <img width="250" height="500" src="git_images/home.jpg" > <img >
-  <img width="250" height="500"  src="git_images/history.jpg"> 
-  <img width="250" height="500" src="git_images/details.jpg" > 
-  <ima width="250" height="500" src = "git_images/alert.jpg" >
+  <img width="250" height="500" src="git_images/home.jpg" > <img >  <img > <img >
+  <img width="250" height="500"  src="git_images/history.jpg">  <img > <img > <img >
+  <img width="250" height="500" src="git_images/details.jpg" >  <img > <img > <img >
+  <ima width="250" height="500" src = "git_images/alert.jpg" > <img > <img > <img >
 </p>
 
