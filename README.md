@@ -26,7 +26,7 @@ Android, Kotlin
 <p align = "left" >
   <img width="250" height="500" src="git_images/home.jpg" style="margin-right: 5px>
   <img width="250" height="500"  src="git_images/history.jpg" style="margin-right: 5px> 
-  <img width="250" height="500" src="git_images/details.jpg" style="margin-right: 5px> 
-  <ima width="250" height="500" src = "git_images/alert.jpg" style="margin-right: 5px>
+  <img width="250" height="500" src="git_images/details.jpg" > 
+  <ima width="250" height="500" src = "git_images/alert.jpg" >
 </p>
 
